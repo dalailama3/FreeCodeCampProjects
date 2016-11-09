@@ -25,27 +25,49 @@ $( document ).ready(function () {
   var startButton = $("button");
 
   var timeStrToSecs = function (str) {
-    if (str.length === 2) {
+    if (str.length <= 2) {
       return parseInt(str) * 60;
     } else {
-      var mins = parseInt(str.slice(0,2));
-      var secs = parseInt(str.slice(3));
-      return mins * 60 + secs;
+      var cIdx = str.indexOf(":");
+      var mins = parseInt(str.slice(0, cIdx));
+      var secs = parseInt(str.slice(cIdx+1));
+      return (mins * 60) + secs;
+    }
+  }
+
+  var paddedStr = function (num) {
+    if ( num < 10 ) {
+      return "0" + num;
+    } else {
+      return num;
     }
   }
 
   var countDown = function (start) {
     var seconds = timeStrToSecs(start)
     seconds -= 1;
+
     var mins = Math.floor(seconds/60);
     var secs = seconds % 60;
-    $('.display').text(mins + ":" + secs);
+
+    if (seconds < 60) {
+      mins = "00";
+    }
+
+    $('.display').text(mins + ":" + paddedStr(secs));
   };
 
   startButton.on('click', function () {
-    setInterval(function () {
+    var intervalId = setInterval(function () {
       var startTime = $('.display').text();
+
       var strTime = startTime.toString().trim();
+
+      if (strTime === '00:00') {
+        clearInterval(intervalId);
+        console.log("DONE");
+        return;
+      }
       countDown(strTime);
     }, 1000);
   });
