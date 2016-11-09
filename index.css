@@ -1,0 +1,33 @@
+html, body, div, figure {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-family: inherit;
+  background: transparent;
+  text-decoration: inherit;
+  text-align: inherit;
+}
+
+.setters {
+  background:red;
+  text-align: center;
+  width: 300px;
+  margin: 50px auto;
+  font-size: 100px;
+  height: 200px;
+}
+
+.break-setter {
+  float:left;
+  background: blue;
+  width: 50%;
+  font-size: 36px;
+}
+
+.timer-setter {
+  float: right;
+  background: green;
+  width: 50%;
+  font-size: 36px;
+}
