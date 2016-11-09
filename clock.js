@@ -5,8 +5,9 @@ $( document ).ready(function () {
     var $clicked = $(this);
     var parent = $clicked.parent();
     var operation = $clicked.text();
-    var timerVal = parent.clone().children().remove().end().text();
+    var timerVal = parent.clone().children().remove().end().text().trim();
     var curVal = parseInt(timerVal);
+    var curDisplayVal = $('.display').text().trim().slice(0,2);
 
     if (operation === "+") {
       curVal ++;
@@ -15,14 +16,14 @@ $( document ).ready(function () {
     }
     if (curVal > 0 && curVal <= 90) {
       parent.html("<span>-</span>" + ' ' + curVal + ' ' + "<span>+</span>");
-      if (parent.attr("class") === 'timer-setter') {
+      if (parent.attr("class") === 'timer-setter' && timerVal === curDisplayVal) {
         $('.display').text(curVal + ':00');
       }
     }
 
   });
 
-  var startButton = $("button");
+  var startButton = $(".start");
 
   var timeStrToSecs = function (str) {
     if (str.length <= 2) {
@@ -57,7 +58,30 @@ $( document ).ready(function () {
     $('.display').text(mins + ":" + paddedStr(secs));
   };
 
+  var startBreak = function () {
+
+    var breakId = setInterval(function () {
+      var displayTime = $(".display").text();
+      if (displayTime === "00:00") {
+        clearInterval(breakId);
+        var timerLength = $('.timer-setter').clone().children().remove().end().text().trim();
+        $(".display").text(timerLength + ":00");
+        return
+
+      }
+      countDown(displayTime);
+    }, 1000);
+
+    var stopButton = $(".stop")
+
+    stopButton.on('click', function () {
+      clearInterval(breakId);
+    });
+
+  }
+
   startButton.on('click', function () {
+
     var intervalId = setInterval(function () {
       var startTime = $('.display').text();
 
@@ -65,11 +89,22 @@ $( document ).ready(function () {
 
       if (strTime === '00:00') {
         clearInterval(intervalId);
-        console.log("DONE");
+        var breakLength = $('.break-setter').clone().children().remove().end().text().trim();
+        $('.display').text(breakLength + ":" + "00");
+        startBreak();
         return;
+
       }
       countDown(strTime);
     }, 1000);
+
+    var stopButton = $(".stop")
+
+    stopButton.on('click', function () {
+      clearInterval(intervalId);
+    });
+
   });
+
 
 });
