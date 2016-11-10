@@ -9,7 +9,7 @@ $( document ).ready(function () {
     var timerVal = parent.clone().children().remove().end().text().trim();
     var curVal = parseInt(timerVal);
     var colonIdx = $('.display').text().trim().indexOf(":");
-    var curDisplayVal = $('.display').text().trim().slice(0,colonIdx);
+    var curDisplayVal = $('.display').text().trim();
 
     if (operation === "+") {
       curVal ++;
@@ -18,7 +18,7 @@ $( document ).ready(function () {
     }
     if (curVal > 0 && curVal <= 90) {
       parent.html("<span>-</span>" + ' ' + curVal + ' ' + "<span>+</span>");
-      if (parent.attr("class") === 'timer-setter' && timerVal === curDisplayVal) {
+      if (parent.attr("class") === 'timer-setter' && (timerVal + ":00") === curDisplayVal) {
         $('.display').text(curVal + ':00');
       }
     }
@@ -96,7 +96,7 @@ $( document ).ready(function () {
         $('.display').text(breakLength + ":" + "00");
         var breakButton = $("<button class='break'>START BREAK</button>");
         breakButton.on('click', startBreak);
-        $('body').append(breakButton);
+        $('.button-group').append(breakButton);
         return;
 
       }
