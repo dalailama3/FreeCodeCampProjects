@@ -1,5 +1,6 @@
 $( document ).ready(function () {
 
+
   var setters = $('.timer-setter, .break-setter');
   setters.on("click", "span", function (e) {
     var $clicked = $(this);
@@ -7,7 +8,8 @@ $( document ).ready(function () {
     var operation = $clicked.text();
     var timerVal = parent.clone().children().remove().end().text().trim();
     var curVal = parseInt(timerVal);
-    var curDisplayVal = $('.display').text().trim().slice(0,2);
+    var colonIdx = $('.display').text().trim().indexOf(":");
+    var curDisplayVal = $('.display').text().trim().slice(0,colonIdx);
 
     if (operation === "+") {
       curVal ++;
@@ -66,7 +68,8 @@ $( document ).ready(function () {
         clearInterval(breakId);
         var timerLength = $('.timer-setter').clone().children().remove().end().text().trim();
         $(".display").text(timerLength + ":00");
-        return
+        $("button.break").remove();
+        return;
 
       }
       countDown(displayTime);
@@ -91,7 +94,9 @@ $( document ).ready(function () {
         clearInterval(intervalId);
         var breakLength = $('.break-setter').clone().children().remove().end().text().trim();
         $('.display').text(breakLength + ":" + "00");
-        startBreak();
+        var breakButton = $("<button class='break'>START BREAK</button>");
+        breakButton.on('click', startBreak);
+        $('body').append(breakButton);
         return;
 
       }
@@ -105,6 +110,7 @@ $( document ).ready(function () {
     });
 
   });
+
 
 
 });

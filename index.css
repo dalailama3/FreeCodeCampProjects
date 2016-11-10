@@ -1,4 +1,4 @@
-html, body, div, figure {
+html, body, div, span, figure {
   margin: 0;
   padding: 0;
   border: 0;
@@ -8,6 +8,23 @@ html, body, div, figure {
   text-decoration: inherit;
   text-align: inherit;
 }
+
+.break-setter span {
+  padding: 5px;
+}
+
+.timer-setter span {
+  padding: 5px;
+}
+
+.break-setter span:hover {
+  cursor: pointer;
+}
+
+.timer-setter span:hover {
+  cursor: pointer;
+}
+
 
 .setters {
   background:red;
@@ -20,14 +37,14 @@ html, body, div, figure {
 
 .break-setter {
   float:left;
-  background: blue;
+  background: green;
   width: 50%;
-  font-size: 36px;
+  font-size: 42px;
 }
 
 .timer-setter {
   float: right;
   background: green;
   width: 50%;
-  font-size: 36px;
+  font-size: 42px;
 }
