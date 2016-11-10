@@ -5,7 +5,7 @@ $( document ).ready(function () {
   setters.on("click", "span", function (e) {
     var $clicked = $(this);
     var parent = $clicked.parent();
-    var operation = $clicked.text();
+    var operation = $clicked.text().trim();
     var timerVal = parent.clone().children().remove().end().text().trim();
     var curVal = parseInt(timerVal);
     var colonIdx = $('.display').text().trim().indexOf(":");
@@ -17,7 +17,8 @@ $( document ).ready(function () {
       curVal --;
     }
     if (curVal > 0 && curVal <= 90) {
-      parent.html("<span>-</span>" + ' ' + curVal + ' ' + "<span>+</span>");
+      var pInner = parent.attr("class") === 'timer-setter' ? 'timer length' : 'break length';
+      parent.html("<p>" + pInner + "</p>" + "<span>-</span>" + ' ' + curVal + ' ' + "<span>+</span>");
       if (parent.attr("class") === 'timer-setter' && (timerVal + ":00") === curDisplayVal) {
         $('.display').text(curVal + ':00');
       }

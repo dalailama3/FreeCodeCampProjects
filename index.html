@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Tangerine">
     <link rel="stylesheet" type="text/css" href="./index.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -10,27 +12,33 @@
     <script type="text/javascript" src="./clock.js"></script>
   </head>
   <body>
+    <h1 class="title">Pomodoro Clock</h1>
 
-    <div class="setters">
+    <div class="group">
       <div class="break-setter">
+        <p>break length</p>
         <span> -</span>
         5
         <span> + </span>
       </div>
       <div class="timer-setter">
+        <p>timer length</p>
         <span> -</span>
         25
         <span> + </span>
 
       </div>
+    </div>
+    <div class="tomato">
       <div class="display">
         <span>25:00</span>
       </div>
-  </div>
-  <div class="button-group">
-    <button class="start">START</button>
-    <button class="stop">STOP</button>
-  </div>
-  
+    </div>
+
+    <div class="button-group">
+      <button class="start">START</button>
+      <button class="stop">STOP</button>
+    </div>
+
   </body>
 </html>
