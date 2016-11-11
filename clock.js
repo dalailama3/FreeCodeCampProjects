@@ -57,8 +57,14 @@ $( document ).ready(function () {
     if (seconds < 60) {
       mins = "00";
     }
+    var curTime = mins + ":" + paddedStr(secs);
+    if (curTime === "00:00") {
+      var audio = new Audio("./audio/ping.mp3");
+      audio.play();
+    }
 
     $('.display').text(mins + ":" + paddedStr(secs));
+
   };
 
   var startBreak = function () {
