@@ -1,6 +1,4 @@
 $( document ).ready(function () {
-
-
   var setters = $('.timer-setter, .break-setter');
   setters.on("click", "span", function (e) {
     var $clicked = $(this);
@@ -47,6 +45,34 @@ $( document ).ready(function () {
     }
   }
 
+  var bounce = new Bounce();
+  bounce
+  .scale({
+    from: { x: 0.5, y: 0.5 },
+    to: { x: 1, y: 1 }
+  });
+  // .translate({
+  //   from: { x: -300, y: 0 },
+  //   to: { x: 0, y: 0 },
+  //   duration: 600,
+  //   stiffness: 4
+  // })
+  // .scale({
+  //   from: { x: 1, y: 1 },
+  //   to: { x: 0.1, y: 2.3 },
+  //   easing: "sway",
+  //   duration: 800,
+  //   delay: 65,
+  //   stiffness: 2
+  // })
+  // .scale({
+  //   from: { x: 1, y: 1},
+  //   to: { x: 5, y: 1 },
+  //   easing: "sway",
+  //   duration: 300,
+  //   delay: 30,
+  // })
+
   var countDown = function (start) {
     var seconds = timeStrToSecs(start)
     seconds -= 1;
@@ -56,6 +82,10 @@ $( document ).ready(function () {
 
     if (seconds < 60) {
       mins = "00";
+    }
+
+    if (seconds <= 10) {
+      bounce.applyTo($(".tomato"));
     }
     var curTime = mins + ":" + paddedStr(secs);
 
@@ -74,6 +104,7 @@ $( document ).ready(function () {
       var displayTime = $(".display").text();
       if (displayTime === "00:00") {
         clearInterval(breakId);
+        bounce.remove();
         var timerLength = $('.timer-setter').clone().children().remove().end().text().trim();
         $(".display").text(timerLength + ":00");
         $("button.break").remove();
@@ -100,11 +131,12 @@ $( document ).ready(function () {
 
       if (strTime === '00:00') {
         clearInterval(intervalId);
+        bounce.remove();
 
         var animateId = setInterval(function() {
           $("body").toggleClass("backgroundRed");
           $("h1").toggleClass("colorWhite")
-        }, 1500);
+        }, 1000);
         var breakLength = $('.break-setter').clone().children().remove().end().text().trim();
         $('.display').text(breakLength + ":" + "00");
         var breakButton = $("<button class='break'>START BREAK</button>");
