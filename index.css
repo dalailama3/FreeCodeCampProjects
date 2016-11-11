@@ -15,10 +15,20 @@ h1 {
   font-weight: bold;
   font-family: "Tangerine", sans-serif;
   margin: 20px;
+  transition: color 1s ease-out;
 }
 
 body {
+  transition: background-color 1s ease;
   background: beige;
+}
+
+.backgroundRed {
+  background: #4f7fc7;
+}
+
+.colorWhite {
+  color: white;
 }
 
 p {

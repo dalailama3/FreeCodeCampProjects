@@ -58,9 +58,11 @@ $( document ).ready(function () {
       mins = "00";
     }
     var curTime = mins + ":" + paddedStr(secs);
+
     if (curTime === "00:00") {
       var audio = new Audio("./audio/ping.mp3");
       audio.play();
+
     }
 
     $('.display').text(mins + ":" + paddedStr(secs));
@@ -68,7 +70,6 @@ $( document ).ready(function () {
   };
 
   var startBreak = function () {
-
     var breakId = setInterval(function () {
       var displayTime = $(".display").text();
       if (displayTime === "00:00") {
@@ -99,10 +100,19 @@ $( document ).ready(function () {
 
       if (strTime === '00:00') {
         clearInterval(intervalId);
+
+        var animateId = setInterval(function() {
+          $("body").toggleClass("backgroundRed");
+          $("h1").toggleClass("colorWhite")
+        }, 1500);
         var breakLength = $('.break-setter').clone().children().remove().end().text().trim();
         $('.display').text(breakLength + ":" + "00");
         var breakButton = $("<button class='break'>START BREAK</button>");
-        breakButton.on('click', startBreak);
+
+        breakButton.on('click', function () {
+            startBreak();
+            clearInterval(animateId);
+        });
         $('.button-group').append(breakButton);
         return;
 
